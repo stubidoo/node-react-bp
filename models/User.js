@@ -8,15 +8,17 @@ const UserSchema = new Schema({
     required: true
   },
   email: {
-    type: String,
-    required: true
+    type: String
   },
   password: {
-    type: String,
-    required: true
-  },
-  avatar: {
     type: String
+  },
+  // avatar: {
+  //   type: String
+  // },
+  auth_type: {
+    type: String,
+    default: 'guest'
   },
   date: {
     type: Date,

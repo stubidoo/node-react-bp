@@ -11,9 +11,10 @@ const GuestSchema = new Schema({
     type: String,
     default: 'awaiting'
   },
-  // date_of_rsvp: {
-  //   type: Date
-  // },
+  primary_guest: {
+    type: Boolean,
+    default: false
+  },
   date: {
     type: Date,
     default: Date.now

@@ -3,25 +3,32 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const InvitationSchema = new Schema({
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: 'users'
-  },
   status: {
     type: String,
     default: 'draft'
   },
-  // guests: [
-  //   {
-  //     _id: guest-id,
-  //     primary: guest-id,
-  //     attending: Boolean
-  //   }
-  // ],
-  // last_emailed,
-  // follow_ups,
-
-
+  guests: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'users'
+    }
+  ],
+  last_emailed: {
+    type: Date,
+    default: null
+  },
+  date_of_rsvp: {
+    type: Date,
+    default: null
+  },
+  follow_ups: {
+    type: Number,
+    default: 0
+  },
+  thank_you_message: {
+    type: String,
+    default: null
+  },
   date: {
     type: Date,
     default: Date.now
