@@ -57,22 +57,84 @@ router.post('/guests', passport.authenticate('jwt', { session: false }), (req, r
     .catch(err => res.json({invitation: err}));
 });
 
-// TODO:::::::
-
 // @route   GET api/invitations/:invitation_id
 // @desc    Get an invitation
 // @access  Private
+router.get('/:invitation_id', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Invitation.findById(req.params.invitation_id)
+  .populate('guests', ['user', 'status', 'primary_guest'])
+    .then( invitation => {
+      if(invitation) 
+      {
+        res.json(invitation)
+      } else {
+        res.json({invitation: 'Invitation does not exist'})
+      }
+    })
+});
 
 // @route   GET api/invitations/
 // @desc    Get all invitations
 // @access  Private
+router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Invitation.find()
+  .populate('guests', ['user', 'status', 'primary_guest'])
+  .then( invitations => {
+    if(invitations) {
+      res.json(invitations)
+    } else {
+      res.json({invitations: 'There are no invitations'})
+    }
+  })
+});
+
 
 // @route   DELETE api/invitations/:invitation_id
 // @desc    Remove an invitation
 // @access  Private
+router.delete('/:invitation_id', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Invitation.findById(req.params.invitation_id)
+      .then(invitation => {
+        if(invitation) {
 
-// @route   DELETE api/invitations/guests/:user_id
+          if(invitation.guests.length > 0) {
+            res.json({invitation: 'Invitation contains guests, remove guests first'})
+          } else {
+            res.json({invitation: 'Invitation removed succesfully'})
+            invitation.remove().exec();
+          }
+          
+          
+        } else {
+          res.json({invitation: 'Invitation does not exist'})
+        }
+      })
+      .catch(err => res.status(404).json(err));
+});
+
+
+// @route   DELETE api/invitations/guests/:guest_id
 // @desc    Remove guests from invitation
 // @access  Private
+router.delete('/guests/:guest_id', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Invitation.findById(req.params.guest_id)
+      .then(invitation => {
+        
+        // TODO: Query invitations for the guest id
+
+        // Get remove index
+        const removeIndex = profile.experience
+          .map(item => item.id)
+          .indexOf(req.params.exp_id);
+
+        // Splice out of array
+        profile.experience.splice(removeIndex, 1);
+
+        // Save
+        profile.save().then(profile => res.json(profile));
+      })
+      .catch(err => res.status(404).json(err));
+});
+
 
 module.exports = router;
