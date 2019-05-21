@@ -38,7 +38,7 @@ class Navbar extends Component {
                 <a className="nav-link" >Manage Invitations</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" >Add / Edit Invitation</a>
+                <Link to="/manage-invitations" className="nav-link" >Create Invitation</Link>
               </li>
             </ul>
             {isAuthenticated ? authLinks : guestLinks}
