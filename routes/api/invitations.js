@@ -77,7 +77,7 @@ router.get('/:invitation_id', passport.authenticate('jwt', { session: false }), 
 // @access  Private
 router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
   Invitation.find()
-  .populate('guests', ['user', 'status', 'primary_guest'])
+  .populate('users', ['name', 'email', 'status', 'primary_guest'])
   .then( invitations => {
     if(invitations) {
       res.json(invitations)

@@ -12,6 +12,7 @@ import Footer from './components/layout/Footer';
 import Landing from './components/layout/Landing';
 import Login from './components/auth/Login';
 import CreateInvite from './components/create-invite/CreateInvite';
+import ManageInvitations from './components/manage-invitations/ManageInvitations';
 
 import './App.css';
 
@@ -41,7 +42,8 @@ function App() {
           <div className="container page">
             <Route exact path="/" component={ Landing } />
             <Route exact path="/login" component={ Login } />
-            <Route exact path="/manage-invitations" component={ CreateInvite } />
+            <Route exact path="/manage-invitations" component={ ManageInvitations } />
+            <Route exact path="/create-invite" component={ CreateInvite } />
           </div>
           <Footer />
         </div>

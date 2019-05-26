@@ -35,10 +35,10 @@ class Navbar extends Component {
           <div className="collapse navbar-collapse" id="navbarResponsive">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link" >Manage Invitations</a>
+              <Link to="/manage-invitations" className="nav-link" >Manage Invitations</Link>
               </li>
               <li className="nav-item">
-                <Link to="/manage-invitations" className="nav-link" >Create Invitation</Link>
+                <Link to="/create-invite" className="nav-link" >Create Invitation</Link>
               </li>
             </ul>
             {isAuthenticated ? authLinks : guestLinks}

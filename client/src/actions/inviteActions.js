@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_INVITE, INVITE_LOADING, GET_ERRORS } from './types';
+import { GET_INVITE, GET_INVITES, INVITE_LOADING, GET_ERRORS } from './types';
 
 // Get invite
 export const getInvite = () => dispatch => {
@@ -18,6 +18,26 @@ export const getInvite = () => dispatch => {
       })  
     )
 }
+
+// Get invites
+export const getInvites = () => dispatch => {
+  dispatch(setInviteLoading());
+  axios.get('api/invitations')
+    .then(res => 
+      // console.log(res)
+      dispatch({
+        type: GET_INVITES,
+        payload: res.data
+      })
+    )
+    .catch(err => 
+      dispatch({
+        type: GET_ERRORS,
+        payload: err
+      })  
+    )
+}
+
 // Create Invite
 export const createInvite = (inviteData, history) => async dispatch => {
   const primaryGuest = {

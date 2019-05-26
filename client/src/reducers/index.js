@@ -5,5 +5,6 @@ import inviteReducer from './inviteReducer';
 
 export default combineReducers({
   auth: authReducer,
-  errors: errorReducer
+  errors: errorReducer,
+  invitations: inviteReducer
 });
