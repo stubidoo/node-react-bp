@@ -19,10 +19,27 @@ export const getInvite = () => dispatch => {
     )
 }
 // Create Invite
-export const createInvite = (inviteData, history) => dispatch => {
+export const createInvite = (inviteData, history) => async dispatch => {
+  const primaryGuest = {
+    name: inviteData.name,
+    email: inviteData.email,
+    primary_guest: true
+  }
+  inviteData.invitees.push(primaryGuest);
+  const guests = await createGuests(inviteData.invitees);
+
+  let users = [];
+  for(let guest of guests) {
+    users.push(guest.data._id);
+  }
+
+  console.log(guests);
+  console.log(users);
   axios
-    .post('/api/invitations', inviteData)
-    .then(res => history.push('/'))
+    .post('/api/invitations', {users})
+    .then(res => {
+      console.log(res)
+    })
     .catch(err => 
       dispatch({
         type: GET_ERRORS,
@@ -31,6 +48,17 @@ export const createInvite = (inviteData, history) => dispatch => {
     )
 
 }
+
+const createGuests = async (guestData) => {
+  const guests = guestData.map( guest => createGuest(guest));
+  const guestsResponse = await Promise.all(guests);
+  return guestsResponse;
+}
+
+const createGuest = (guest) => {
+  return axios.post('api/guests', guest)
+}
+
 
 export const setInviteLoading = () => {
   return {

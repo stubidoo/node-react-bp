@@ -60,6 +60,8 @@ class CreateInvite extends Component {
       invitees: this.state.invitees
     }
 
+    // this.props.createGuests(this.state.invitees);
+
     // console.log(inviteData)
 
     this.props.createInvite(inviteData, this.props.history);

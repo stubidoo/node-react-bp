@@ -13,9 +13,14 @@ const UserSchema = new Schema({
   password: {
     type: String
   },
-  // avatar: {
-  //   type: String
-  // },
+  status: {
+    type: String,
+    default: 'awaiting'
+  },
+  primary_guest: {
+    type: Boolean,
+    default: false
+  },
   auth_type: {
     type: String,
     default: 'guest'

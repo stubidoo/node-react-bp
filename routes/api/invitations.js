@@ -21,12 +21,11 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
   
   // TODO: check if valid user and if primary user
   // TODO: if user, then primary guest
-  guests = [];
-  guests.push(req.body.primary_guest);
 
   new Invitation({
-    guests
-  }).save().then(profile => res.json(profile));
+    users: req.body.users
+  }).save()
+  .then(profile => res.json(profile));
 });
 
 // @route   POST api/invitations/guests

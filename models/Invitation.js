@@ -7,10 +7,10 @@ const InvitationSchema = new Schema({
     type: String,
     default: 'draft'
   },
-  guests: [
+  users: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'guests'
+      ref: 'users'
     }
   ],
   last_emailed: {

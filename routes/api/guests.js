@@ -15,16 +15,28 @@ router.get('/test', (req, res) => res.json({ msg: 'Guests Works' }));
 // @desc    Create new guest
 // @access  Private
 router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
-  Guest.findOne({ user: req.body.user }).then(guest => {
-    if (guest) {
-      res.json({ guest: 'Guest already exists' })
-    } else {
-      // Save Profile
-      new Guest({
-        user: req.body.user
-      }).save().then(profile => res.json(profile));
-    }
-  });
+  // Guest.findOne({ user: req.body.user }).then(guest => {
+  //   if (guest) {
+  //     res.json({ guest: 'Guest already exists' })
+  //   } else {
+  //     // Save Profile
+  //     new Guest({
+  //       user: req.body.user
+  //     }).save().then(profile => res.json(profile));
+  //   }
+  // });
+
+  // TODO: Check if email exists
+
+  const email = req.body.email !== undefined ? req.body.email : null;
+  const primary_guest = req.body.primary_guest !== undefined ? req.body.primary_guest : false;
+
+  new User({
+    name: req.body.name,
+    email,
+    primary_guest
+
+  }).save().then(user => res.json(user));
 });
 
 // @route   PATCH api/guests/
