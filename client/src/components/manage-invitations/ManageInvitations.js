@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { getInvites } from '../../actions/inviteActions';
+import RowItem from './RowItem';
 
 class ManageInvitations extends Component {
   // constructor(props) {
@@ -18,6 +19,20 @@ class ManageInvitations extends Component {
   render() {
     const { invitations } = this.props.invitations;
     console.log(invitations)
+    let tableContent;
+    if(!invitations) {
+      tableContent = <tr>
+        <td></td>
+      </tr>;
+    } else {
+      tableContent = (
+        invitations.map((invite) => {
+          return (
+            <RowItem invite={invite} key={invite._id}/>
+          )
+        })
+      )
+    }
     return (
       <div id="manage-invitations" className="container page">
         <div className="row">
@@ -38,17 +53,7 @@ class ManageInvitations extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="table-light">
-                    <th scope="row">Light</th>
-                    <td>Column content</td>
-                    <td>Column content</td>
-                    <td>Column content</td>
-                    <td>Column content</td>
-                    <td>
-                        <button type="button" className="btn btn-outline-primary">Primary</button>
-                        <button type="button" className="btn btn-outline-primary">Primary</button>
-                    </td>
-                  </tr>
+                  {tableContent}
                 </tbody>
               </table> 
             </div>
@@ -61,7 +66,6 @@ class ManageInvitations extends Component {
 
 ManageInvitations.propTypes = {
   getInvites: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 }
 
