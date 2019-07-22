@@ -18,7 +18,6 @@ class ManageInvitations extends Component {
   
   render() {
     const { invitations } = this.props.invitations;
-    console.log(invitations)
     let tableContent;
     if(!invitations) {
       tableContent = <tr>

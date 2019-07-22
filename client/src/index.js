@@ -1,7 +1,7 @@
 /* BootStrap Deps */
 import './lib-css/custom-bootstrap-4.3.1.min.css';
-import $ from 'jquery';
-import Popper from 'popper.js';
+import $ from 'jquery'; // eslint-disable-line
+import Popper from 'popper.js'; // eslint-disable-line
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 /* BootStrap Deps */
 

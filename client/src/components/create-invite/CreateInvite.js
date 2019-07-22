@@ -101,14 +101,32 @@ class CreateInvite extends Component {
                   onChange={this.onChange}
                   error={errors.email}
                 />
-                {/* <TextFieldGroup
-                  placeholder="Invitees"
-                  name="invitees"
-                  type="invitees"
-                  value={this.state.invitees}
-                  onChange={this.onChange}
-                  error={errors.invitees}
-                /> */}
+                <div className="form-group">
+                  <label className="control-label">Input addons</label>
+                  <div className="form-group">
+                    <div className="input-group mb-3">
+                      <input type="text" className="form-control" aria-label="Amount (to the nearest dollar)"/>
+                      <button type="button" class="btn btn-primary">Primary</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="bs-component">
+                  <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                      Cras justo odio
+                      {/* <span class="badge badge-primary badge-pill">x</span> */}
+                      <span>X</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                      Dapibus ac facilisis in
+                      <span class="badge badge-primary badge-pill">x</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                      Morbi leo risus
+                      <span class="badge badge-primary badge-pill">x</span>
+                    </li>
+                  </ul>
+                </div>
                 <ul>
                   {this.state.invitees.map((guest) => {
                     return (<li key={guest.id}>{guest.name} <button onClick={(e) => this.onRemove(e, guest)}>x</button></li>)
